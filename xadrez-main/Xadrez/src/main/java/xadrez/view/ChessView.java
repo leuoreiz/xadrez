@@ -9,10 +9,14 @@ import java.awt.event.ActionListener;
 public class ChessView extends JFrame {
     private final JButton[][] boardButtons = new JButton[8][8];
     private final JLabel statusLabel = new JLabel("Bem-vindo ao Xadrez!");
+    // Novos botões de controle
+    private final JButton newGameButton = new JButton("Novo Jogo");
+    private final JButton saveButton = new JButton("Salvar Jogo");
+    private final JButton loadButton = new JButton("Carregar Jogo");
 
     public ChessView() {
         setTitle("Xadrez");
-        setSize(600, 650);
+        setSize(600, 700); // Aumentado o tamanho para os novos botões
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -31,11 +35,32 @@ public class ChessView extends JFrame {
             }
         }
 
+        // Novo painel para os botões de controle
+        JPanel controlPanel = new JPanel();
+        controlPanel.add(newGameButton);
+        controlPanel.add(saveButton);
+        controlPanel.add(loadButton);
+
+        add(controlPanel, BorderLayout.NORTH);
         add(boardPanel, BorderLayout.CENTER);
         add(statusLabel, BorderLayout.SOUTH);
         setVisible(true);
     }
+    
+    // Métodos para adicionar listeners aos novos botões
+    public void setNewGameListener(ActionListener listener) {
+        newGameButton.addActionListener(listener);
+    }
 
+    public void setSaveListener(ActionListener listener) {
+        saveButton.addActionListener(listener);
+    }
+
+    public void setLoadListener(ActionListener listener) {
+        loadButton.addActionListener(listener);
+    }
+
+    // O resto da classe permanece o mesmo...
     public void updateBoard(Piece[][] board) {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
@@ -54,6 +79,14 @@ public class ChessView extends JFrame {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 boardButtons[row][col].setEnabled(false);
+            }
+        }
+    }
+
+    public void enableBoard() {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                boardButtons[row][col].setEnabled(true);
             }
         }
     }

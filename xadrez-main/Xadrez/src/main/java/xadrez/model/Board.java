@@ -1,6 +1,8 @@
 package xadrez.model;
 
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable {
     private final Piece[][] board;
 
     public Piece[][] getBoard() {

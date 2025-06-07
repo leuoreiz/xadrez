@@ -1,6 +1,8 @@
 package xadrez.model;
 
-public abstract class Piece {
+import java.io.Serializable;
+
+public abstract class Piece implements Serializable {
     private final boolean isWhite;
 
     public Piece(boolean isWhite) {
